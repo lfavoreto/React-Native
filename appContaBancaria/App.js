@@ -55,14 +55,6 @@ class App extends Component {
   }
 
   render() {
-    let opSex = this.state.sexOptions.map((i, key) => {
-      return <Picker.Item key={key} value={key} label={i.sex} />
-    });
-
-    let opSchool = this.state.schoolingOptions.map((i, key) => {
-      return <Picker.Item key={key} value={key} label={i.scho} />
-    });
-
     return (
       <View style={styles.container}>
          <ScrollView>
@@ -85,13 +77,19 @@ class App extends Component {
           <Picker 
             selectedValue={this.state.sexs}
             onValueChange={(itemValue, itemIndex) => this.setState({sexs: itemValue})}>
-              {opSex}
+              <Picker.Item key={1} value={'Masculino'} label="Masculino" />
+              <Picker.Item key={0} value={'Feminino'} label="Feminino" /> 
           </Picker>
           <Text style={styles.label}>Escolaridade:</Text>
           <Picker
             selectedValue={this.state.schooling}
             onValueChange={(item, index) => {this.setState({schooling: item})}}>
-              {opSchool}
+              <Picker.Item key={0} value={'Fundamental Incompleto'} label={'Fundamental Incompleto'} />
+              <Picker.Item key={1} value={'Fundamental Completo'} label={'Fundamental Completo'} />
+              <Picker.Item key={2} value={'Médio Incompleto'} label={'Médio Incompleto'} />
+              <Picker.Item key={3} value={'Médio Completo'} label={'Médio Completo'} />
+              <Picker.Item key={4} value={'Superior Incompleto'} label={'Superior Incompleto'} />
+              <Picker.Item key={5} value={'Superior Completo'} label={'Superior Completo'} />
           </Picker>
           <Text style={styles.label}>Limite:</Text>
           <Slider
