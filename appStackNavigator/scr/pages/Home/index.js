@@ -21,10 +21,6 @@ export default function Home() {
     return (
       <View style={styles.container}>
         <ScrollView>
-          <Text style={styles.title}>
-            Conta Bancária
-          </Text>
-
           <Text style={styles.label}>Nome:</Text>
           <TextInput
               style={styles.input}
@@ -84,12 +80,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     padding: 20
-  },
-  title: {
-    textAlign: 'center',
-    fontSize: 20,
-    fontWeight: 'bold',
-    fontSize: 28,
   },
   label: {
     marginBottom: 5,
