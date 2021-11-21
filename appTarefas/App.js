@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StatusBar, TextInput, Button, FlatList } from "react-native";
+import { View, Text, StatusBar, TextInput, Button, FlatList, Pressable } from "react-native";
 import * as SQLite from 'expo-sqlite';
 
 const db = SQLite.openDatabase("tarefas.db");
@@ -35,14 +35,31 @@ const App = () => {
         [tarefa],
         (sqlTxn, res) => {
           console.log(`${tarefa} Tarefa adicionada com sucesso!`);
-          getTarefas();
           setTarefa("");
+          getTarefas();
         },
         error => {
           console.log("Erro ao inserir uma Tarefa " + error.message);
         },
       );
     });
+  };
+
+  const excluirTarefa = (id) => {
+    db.transaction(txn => {
+      txn.executeSql(
+        `delete from tarefas where id = ?`, 
+        [id],
+        (sqlTxn, res) => {
+          console.log(`${tarefa} Tarefa deletada com sucesso!`)
+          getTarefas();
+          setTarefa("");
+        },
+        error => {
+          console.log("Erro ao deletar uma Tarefa " + error.message);
+        },
+      );
+    })
   };
  
   const getTarefas = () => {
@@ -80,8 +97,9 @@ const App = () => {
         borderBottomWidth: 1,
         borderColor: "#ddd",
       }}>
-        <Text style={{ marginRight: 9 }}>{item.id}</Text>
-        <Text>{item.nome}</Text>
+        <Text style={{ width: '5%', marginRight: 9 }} >{item.id}</Text>
+        <Text style={{ width: '90%' }}>{item.nome}</Text>
+        <Button title="X" onPress={() => {excluirTarefa(item.id)}}></Button>
       </View>
     );
   };
