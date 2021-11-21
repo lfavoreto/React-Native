@@ -10,8 +10,7 @@ export default class App extends Component{
       font: false
     };
   }
- 
-  // Quando o componente é montado em tela (quando abrimos o App)
+
   async componentDidMount(){
     await AsyncStorage.getItem('darkMode').then((value)=> {
       this.setState({darkMode: value});
@@ -21,7 +20,6 @@ export default class App extends Component{
     })
   }
  
-  // Toda vez que um state é atualizado
   async componentDidUpdate(_, prevState){
     const darkMode = this.state.darkMode;
     const font = this.state.font;
